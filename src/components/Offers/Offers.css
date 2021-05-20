@@ -1,0 +1,41 @@
+.control-dots{
+    visibility: hidden;
+  }
+
+#carousel-img{
+    width: 100vw;
+    height: 300px;
+}
+.img-1{
+    background: url('../../assets/1.jpg') center no-repeat ;
+    background-size: cover; 
+}
+.img-2{
+    background: url('../../assets/4.jpg') center no-repeat ;
+    background-size: cover; 
+}
+.img-3{
+    background: url('../../assets/2.jpg') center no-repeat ;
+    background-size: cover; 
+}
+.img-4{
+    background: url('../../assets/3.jpg') center no-repeat ;
+    background-size: cover; 
+}
+
+#content-box{
+    background: rgba(0, 0, 0, .6);
+    height: 100%;
+}
+
+#content{
+    width: fit-content;
+    color: white;
+    text-align: left;
+}
+
+#content-offer p{
+    line-height: 30px;
+    font-size: 28px;
+    font-weight: 400;
+}
