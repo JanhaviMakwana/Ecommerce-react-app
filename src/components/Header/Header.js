@@ -2,24 +2,42 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { withState } from '../../ecom-context';
 import { withRouter } from 'react-router-dom';
+import * as actionTypes from '../../store/actionTypes';
 import './Header.css';
 
 
 const Header = (props) => {
-
     const [keyword, setKeyword] = useState('');
-    console.log(props.state.user);
     const userType = props.state.user ? props.state.user.role : null;
-    const cart = props.state.user? props.state.user.cart: [];
+    const cart = props.state.user ? props.state.user.cart : [];
 
     const keywordChangehandler = (event) => {
         setKeyword(event.target.value);
-
     };
 
     const searchHandler = (event) => {
         event.preventDefault();
         props.history.push(`/products?q=${keyword}`);
+    };
+
+    const ordersHandler = () => {
+        props.history.push('/order');
+    };
+
+    const cartHandler = () => {
+        if (props.state.user) {
+            props.history.push('/cart');
+        } else {
+            alert('Please login first !!!')
+        }
+    };
+
+    const authHandler = () => {
+        if (!props.state.user) {
+            props.history.push('/auth');
+        } else {
+            props.dispatch({ type: actionTypes.LOGOUT })
+        }
     };
 
     return (
@@ -36,9 +54,11 @@ const Header = (props) => {
                         </NavLink>
                     </li>
                     {userType !== 'admin' && <li class="nav-item ml-3 h6">
-                        <NavLink to="/orders" className="nav-link">
-                            Orders
-                        </NavLink>
+                        <button className="nav-link btn auth-btn" onClick={ordersHandler}>
+                            <p className="text-white h6">
+                                Orders
+                            </p>
+                        </button>
                     </li>}
                     {userType !== 'admin' && <li>
                         <form className="form-inline" onSubmit={searchHandler}>
@@ -52,16 +72,18 @@ const Header = (props) => {
                         </form>
                     </li>}
                     <li class="nav-item ml-3">
-                        <button className="nav-link btn auth-btn">
+                        <button className="nav-link btn auth-btn" onClick={authHandler}>
                             <p className="text-white h6">
                                 {userType === null ? "Login" : "Logout"}
                             </p>
                         </button>
                     </li>
                     {userType !== 'admin' && <li class="nav-item ml-3 h6">
-                        <NavLink to="/cart" className="nav-link">
-                            Cart<span className="text-warning pl-2">{cart.length}</span>
-                        </NavLink>
+                        <button className="nav-link btn auth-btn" onClick={cartHandler}>
+                            <p className="text-white h6">
+                                Cart<span className="text-warning pl-2">{cart.length}</span>
+                            </p>
+                        </button>
                     </li>}
                 </ul>
             </div>

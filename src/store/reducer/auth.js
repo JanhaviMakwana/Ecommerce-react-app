@@ -25,7 +25,7 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 userType: null,
-                user:null
+                user: null
             }
         case actionTypes.ADD_TO_CART:
             return {

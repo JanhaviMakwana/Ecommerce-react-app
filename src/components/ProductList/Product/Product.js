@@ -24,17 +24,17 @@ const Product = (props) => {
                     quantity: 1
                 }
                 user.cart.push(data)
-                ProductService.addToCart(user, user.id)
+                ProductService.handleCart(user, user.id)
                     .then(res => { props.dispatch({ type: actionTypes.ADD_TO_CART, user: res }) })
                     .catch(err => { console.log(err); })
             } else {
                 user.cart.pop(x => x.productId === id)
-                ProductService.addToCart(user, user.id)
+                ProductService.handleCart(user, user.id)
                     .then(res => { props.dispatch({ type: actionTypes.ADD_TO_CART, user: res }) })
                     .catch(err => { console.log(err); })
             }
         } else {
-            props.history.push('/auth');
+            alert('Please login first !!!');
         }
     }
 
@@ -50,9 +50,6 @@ const Product = (props) => {
             <button className="btn btn-primary cart" onClick={() => addToCartHandler(props.product.id, data.length)}>
                 <p className="text-white h6">{data.length === 0 ? "ADD TO CART" : "REMOVE FROM CART"}</p>
             </button>
-            {/*  <div className="cart" >
-
-            </div> */}
         </div>
     );
 };

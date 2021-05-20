@@ -32,7 +32,7 @@ const ProductService = {
             });
     },
 
-    addToCart: (data, id) => {
+    handleCart: (data, id) => {
         console.log(data)
         return axios.put(`/users/${id}`, data)
             .then(({ data }) => {

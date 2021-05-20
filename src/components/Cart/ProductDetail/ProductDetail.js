@@ -1,13 +1,13 @@
 import React from 'react';
+import './ProductDetail.css';
 
 const ProductDetail = (props) => {
     const product = props.product
 
     return (
-        <div style={{ border: '1px solid gray' }}>
-            <p>product</p>
+        <div className="product-cart">
             <p>{product.title}</p>
-            <p>Price:{product.price}</p>
+            <p className="price">Price<strong>:{product.price} &#36;</strong></p>
             <button
                 className="btn btn-secondary btn-sm"
                 onClick={() => props.quantityHandler(product.productId, "Decrement")}

@@ -35,7 +35,7 @@ class Auth extends React.Component {
             AuthService.signup(email, password).then(res => {
                 console.log(res);
                 this.props.dispatch({ type: actionTypes.AUTH_SUCCESS, user: res, userType: "user", cart: [] })
-                this.props.history.push('/');
+                this.props.history.goBack();
             }).catch(err => {
                 this.props.dispatch({ type: actionTypes.AUTH_FAIL, error: 'Email already is use!!' })
             })
@@ -45,7 +45,7 @@ class Auth extends React.Component {
                 const data = res.slice(0, 1).shift()
                 console.log(data);
                 this.props.dispatch({ type: actionTypes.AUTH_SUCCESS, user: data, userType: data.role, cart: data.cart ? data.cart : [] })
-                this.props.history.push('/');
+                this.props.history.goBack();
             }).catch(err => {
                 this.props.dispatch({ type: actionTypes.AUTH_FAIL, error: 'User Not Found' })
             })
